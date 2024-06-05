@@ -3,10 +3,6 @@
     "description": "Pretty simple and fast AST to ECMAScript Generator",
     "homepage": "https://github.com/tabaneproject/ecmagen",
     "main": "escodegen.js",
-    "bin": {
-        "esgenerate": "./bin/esgenerate.js",
-        "escodegen": "./bin/escodegen.js"
-    },
     "files": [
         "LICENSE.BSD",
         "README.md",
