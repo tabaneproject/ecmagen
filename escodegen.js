@@ -1015,7 +1015,20 @@
 
         return result;
     };
-
+    CodeGenerator.prototype.generateDecorators = function (node) {
+        var result = [], newLn = newline || ' ', i, iz;
+        if (!node.decorators)
+            return '';
+        for (i = 0, iz = node.decorators.length; i < iz; ++i) {
+            result.push( '@' );
+            result.push( this.generateExpression( node.decorators[i], Precedence.Assignment, F_ALLOW_IN ) );
+            if (i < iz - 1) {
+                result.push( newLn );
+            }
+        }
+        result.push( newLn );
+        return result;
+    };
     CodeGenerator.prototype.generateAssignment = function (left, right, operator, precedence, flags) {
         if (Precedence.Assignment < precedence) {
             flags |= F_ALLOW_IN;
@@ -1176,7 +1189,11 @@
 
         ClassDeclaration: function (stmt, flags) {
             var result, fragment;
-            result  = ['class'];
+            if (stmt.decorators) {
+                result = [this.generateDecorators(stmt), 'class'];
+            } else {
+                result  = ['class'];
+            }
             if (stmt.id) {
                 result = join(result, this.generateExpression(stmt.id, Precedence.Sequence, E_TTT));
             }
@@ -1770,6 +1787,7 @@
 
         FunctionDeclaration: function (stmt, flags) {
             return [
+                this.generateDecorators(stmt),
                 generateAsyncPrefix(stmt, true),
                 'function',
                 generateStarSuffix(stmt) || noEmptySpace(),
