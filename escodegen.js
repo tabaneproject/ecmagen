@@ -1,37 +1,56 @@
 /*
-  Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
-  Copyright (C) 2015 Ingvar Stepanyan <me@rreverser.com>
-  Copyright (C) 2014 Ivan Nikulin <ifaaan@gmail.com>
-  Copyright (C) 2012-2013 Michael Ficarra <escodegen.copyright@michael.ficarra.me>
-  Copyright (C) 2012-2013 Mathias Bynens <mathias@qiwi.be>
-  Copyright (C) 2013 Irakli Gozalishvili <rfobic@gmail.com>
-  Copyright (C) 2012 Robert Gust-Bardon <donate@robert.gust-bardon.org>
-  Copyright (C) 2012 John Freeman <jfreeman08@gmail.com>
-  Copyright (C) 2011-2012 Ariya Hidayat <ariya.hidayat@gmail.com>
-  Copyright (C) 2012 Joost-Wim Boekesteijn <joost-wim@boekesteijn.nl>
-  Copyright (C) 2012 Kris Kowal <kris.kowal@cixar.com>
-  Copyright (C) 2012 Arpad Borsos <arpad.borsos@googlemail.com>
-  Copyright (C) 2020 Apple Inc. All rights reserved.
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions are met:
-
-    * Redistributions of source code must retain the above copyright
-      notice, this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright
-      notice, this list of conditions and the following disclaimer in the
-      documentation and/or other materials provided with the distribution.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-  ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
-  DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-  (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-  ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-  THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    ECMAGen, a simple AST to Code Converter.
+    Open-Source, BSD-2-Clause License
+    
+    This project is forked for Tabane and TabaneProject
+    Organization Codebase.
+    
+    Tabane is a Modularized Javascript Project Manager
+    with built-in superset to boost your Javascript
+    Experience. You can; bundle up your project
+    for Web use, Compile your codes written in Tabane
+    Super-set or perform certain file operations.
+    
+    Copyright (C) 2024 Botaro Shinomiya <citrizon@waifu.club>
+    Copyright (C) 2024 OSCILLIX <oscillixonline@gmail.com>
+    Copyright (C) 2024 Bluskript <bluskript@gmail.com>
+    
+    This section of the code is a rewritten version
+    of "escodegen" package: https://github.com/estools/escodegen
+    
+    Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
+    Copyright (C) 2015 Ingvar Stepanyan <me@rreverser.com>
+    Copyright (C) 2014 Ivan Nikulin <ifaaan@gmail.com>
+    Copyright (C) 2012-2013 Michael Ficarra <escodegen.copyright@michael.ficarra.me>
+    Copyright (C) 2012-2013 Mathias Bynens <mathias@qiwi.be>
+    Copyright (C) 2013 Irakli Gozalishvili <rfobic@gmail.com>
+    Copyright (C) 2012 Robert Gust-Bardon <donate@robert.gust-bardon.org>
+    Copyright (C) 2012 John Freeman <jfreeman08@gmail.com>
+    Copyright (C) 2011-2012 Ariya Hidayat <ariya.hidayat@gmail.com>
+    Copyright (C) 2012 Joost-Wim Boekesteijn <joost-wim@boekesteijn.nl>
+    Copyright (C) 2012 Kris Kowal <kris.kowal@cixar.com>
+    Copyright (C) 2012 Arpad Borsos <arpad.borsos@googlemail.com>
+    Copyright (C) 2020 Apple Inc. All rights reserved.
+    
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+    
+    *   Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.
+    *   Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the distribution.
+    
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+    ARE DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+    THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
 */
 
 /*global exports:true, require:true, global:true*/
