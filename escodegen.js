@@ -1140,7 +1140,17 @@
             }
             return 'continue' + this.semicolon(flags);
         },
-
+        PropertyDefinition: function (expr, precedence, flags) {
+            var result;
+            if (expr['static']) {
+                result = ['static' + space];
+            } else {
+                result = [];
+            }
+            result.push(this.generateAssignment(expr.key, expr.value, '=', Precedence.Assignment, E_TTF));
+            result.push(this.semicolon(flags));
+            return result;
+        },
         ClassBody: function (stmt, flags) {
             var result = [ '{', newline], that = this;
 
@@ -2157,7 +2167,7 @@
             result.push(this.generateStatement(expr.body, S_TFFT));
             return result;
         },
-
+        
         MethodDefinition: function (expr, precedence, flags) {
             var result, fragment;
             if (expr['static']) {
