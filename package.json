@@ -1,7 +1,7 @@
 {
-    "name": "escodegen",
-    "description": "ECMAScript code generator",
-    "homepage": "http://github.com/estools/escodegen",
+    "name": "ecmagen",
+    "description": "Pretty simple and fast AST to ECMAScript Generator",
+    "homepage": "https://github.com/tabaneproject/ecmagen",
     "main": "escodegen.js",
     "bin": {
         "esgenerate": "./bin/esgenerate.js",
@@ -23,11 +23,16 @@
             "name": "Yusuke Suzuki",
             "email": "utatane.tea@gmail.com",
             "web": "http://github.com/Constellation"
+        },
+        {
+            "name": "Botaro Shinomiya",
+            "email": "citrizon@waifu.club",
+            "web": "http://github.com/citrizon"
         }
     ],
     "repository": {
         "type": "git",
-        "url": "http://github.com/estools/escodegen.git"
+        "url": "https://github.com/tabaneproject/ecmagen.git"
     },
     "dependencies": {
         "estraverse": "^5.2.0",
