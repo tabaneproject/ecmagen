@@ -811,7 +811,7 @@
 
     function parenthesize(text, current, should) {
         if (current < should) {
-            return ['(', text, ')'];
+            return ['(' + space, text, space + ')'];
         }
         return text;
     }
@@ -924,7 +924,7 @@
             result = [generateAsyncPrefix(node, true), generateIdentifier(node.params[0])];
         } else {
             result = node.type === Syntax.ArrowFunctionExpression ? [generateAsyncPrefix(node, false)] : [];
-            result.push('(');
+            result.push('(' + space);
             if (node.defaults) {
                 hasDefault = true;
             }
@@ -948,7 +948,7 @@
                 result.push(generateIdentifier(node.rest));
             }
 
-            result.push(')');
+            result.push(space + ')');
         }
 
         return result;
@@ -968,7 +968,7 @@
             result.push(space);
             expr = this.generateExpression(node.body, Precedence.Assignment, E_TTT);
             if (expr.toString().charAt(0) === '{') {
-                expr = ['(', expr, ')'];
+                expr = ['(' + space, expr, space + ')'];
             }
             result.push(expr);
         } else {
@@ -1218,9 +1218,9 @@
             var result = join('do', this.maybeBlock(stmt.body, S_TFFF));
             result = this.maybeBlockSuffix(stmt.body, result);
             return join(result, [
-                'while' + space + '(',
+                'while' + space + '(' + space,
                 this.generateExpression(stmt.test, Precedence.Sequence, E_TTT),
-                ')' + this.semicolon(flags)
+                space + ')' + this.semicolon(flags)
             ]);
         },
 
@@ -1597,9 +1597,9 @@
             var result, fragment, i, iz, bodyFlags, that = this;
             withIndent(function () {
                 result = [
-                    'switch' + space + '(',
+                    'switch' + space + '(' + space,
                     that.generateExpression(stmt.discriminant, Precedence.Sequence, E_TTT),
-                    ')' + space + '{' + newline
+                    space + ')' + space + '{' + newline
                 ];
             });
             if (stmt.cases) {
@@ -1662,9 +1662,9 @@
             var result, bodyFlags, semicolonOptional, that = this;
             withIndent(function () {
                 result = [
-                    'if' + space + '(',
+                    'if' + space + '(' + space,
                     that.generateExpression(stmt.test, Precedence.Sequence, E_TTT),
-                    ')'
+                    space + ')'
                 ];
             });
             semicolonOptional = flags & F_SEMICOLON_OPT;
@@ -1689,7 +1689,7 @@
         ForStatement: function (stmt, flags) {
             var result, that = this;
             withIndent(function () {
-                result = ['for' + space + '('];
+                result = ['for' + space + '(' + space];
                 if (stmt.init) {
                     if (stmt.init.type === Syntax.VariableDeclaration) {
                         result.push(that.generateStatement(stmt.init, S_FFFF));
@@ -1713,9 +1713,9 @@
                 if (stmt.update) {
                     result.push(space);
                     result.push(that.generateExpression(stmt.update, Precedence.Sequence, E_TTT));
-                    result.push(')');
+                    result.push(space + ')');
                 } else {
-                    result.push(')');
+                    result.push(space + ')');
                 }
             });
 
@@ -1790,7 +1790,7 @@
                 this.generateDecorators(stmt),
                 generateAsyncPrefix(stmt, true),
                 'function',
-                generateStarSuffix(stmt) || noEmptySpace(),
+                generateStarSuffix(stmt), noEmptySpace(),
                 stmt.id ? generateIdentifier(stmt.id) : '',
                 this.generateFunctionBody(stmt)
             ];
@@ -1810,9 +1810,9 @@
             var result, that = this;
             withIndent(function () {
                 result = [
-                    'while' + space + '(',
+                    'while' + space + '(' + space,
                     that.generateExpression(stmt.test, Precedence.Sequence, E_TTT),
-                    ')'
+                    space + ')'
                 ];
             });
             result.push(this.maybeBlock(stmt.body, flags & F_SEMICOLON_OPT ? S_TFFT : S_TFFF));
@@ -1823,9 +1823,9 @@
             var result, that = this;
             withIndent(function () {
                 result = [
-                    'with' + space + '(',
+                    'with' + space + '(' + space,
                     that.generateExpression(stmt.object, Precedence.Sequence, E_TTT),
-                    ')'
+                    space + ')'
                 ];
             });
             result.push(this.maybeBlock(stmt.body, flags & F_SEMICOLON_OPT ? S_TFFT : S_TFFF));
@@ -1919,10 +1919,10 @@
             }
 
             if (expr.operator === 'in' && !(flags & F_ALLOW_IN)) {
-                return ['(', result, ')'];
+                return ['(' + space, result, space + ')'];
             }
             if ((expr.operator === '||' || expr.operator === '&&') && (flags & F_FOUND_COALESCE)) {
-                return ['(', result, ')'];
+                return ['(' + space, result, space + ')'];
             }
             return parenthesize(result, currentPrecedence, precedence);
         },
@@ -1937,17 +1937,17 @@
                 result.push('?.');
             }
 
-            result.push('(');
+            result.push('(' + space);
             for (i = 0, iz = expr['arguments'].length; i < iz; ++i) {
                 result.push(this.generateExpression(expr['arguments'][i], Precedence.Assignment, E_TTT));
                 if (i + 1 < iz) {
                     result.push(',' + space);
                 }
             }
-            result.push(')');
+            result.push(space + ')');
 
             if (!(flags & F_ALLOW_CALL)) {
-                return ['(', result, ')'];
+                return ['(' + space, result, space + ')'];
             }
 
             return parenthesize(result, Precedence.Call, precedence);
@@ -1977,14 +1977,14 @@
             );
 
             if (!(flags & F_ALLOW_UNPARATH_NEW) || parentheses || length > 0) {
-                result.push('(');
+                result.push('(' + space);
                 for (i = 0, iz = length; i < iz; ++i) {
                     result.push(this.generateExpression(expr['arguments'][i], Precedence.Assignment, E_TTT));
                     if (i + 1 < iz) {
                         result.push(',' + space);
                     }
                 }
-                result.push(')');
+                result.push(space + ')');
             }
 
             return parenthesize(result, Precedence.New, precedence);
@@ -2001,9 +2001,9 @@
                     result.push('?.');
                 }
 
-                result.push('[');
+                result.push('[' + space);
                 result.push(this.generateExpression(expr.property, Precedence.Sequence, flags & F_ALLOW_CALL ? E_TTT : E_TFT));
-                result.push(']');
+                result.push(space + ']');
             } else {
                 if (!expr.optional && expr.object.type === Syntax.Literal && typeof expr.object.value === 'number') {
                     fragment = toSourceNodeWhenNeeded(result).toString();
@@ -2443,7 +2443,7 @@
             // Due to https://bugzilla.mozilla.org/show_bug.cgi?id=883468 position of expr.body can differ in Spidermonkey and ES6
 
             var result, i, iz, fragment, that = this;
-            result = (expr.type === Syntax.GeneratorExpression) ? ['('] : ['['];
+            result = (expr.type === Syntax.GeneratorExpression) ? ['(' + space] : ['[' + space];
 
             if (extra.moz.comprehensionExpressionStartsWithAssignment) {
                 fragment = this.generateExpression(expr.body, Precedence.Assignment, E_TTT);
@@ -2466,7 +2466,7 @@
             if (expr.filter) {
                 result = join(result, 'if' + space);
                 fragment = this.generateExpression(expr.filter, Precedence.Sequence, E_TTT);
-                result = join(result, [ '(', fragment, ')' ]);
+                result = join(result, [ '(' + space, fragment, space + ')' ]);
             }
 
             if (!extra.moz.comprehensionExpressionStartsWithAssignment) {
@@ -2475,7 +2475,7 @@
                 result = join(result, fragment);
             }
 
-            result.push((expr.type === Syntax.GeneratorExpression) ? ')' : ']');
+            result.push((expr.type === Syntax.GeneratorExpression) ? space + ')' : space + ']');
             return result;
         },
 
@@ -2493,7 +2493,7 @@
             fragment = join(fragment, expr.of ? 'of' : 'in');
             fragment = join(fragment, this.generateExpression(expr.right, Precedence.Sequence, E_TTT));
 
-            return [ 'for' + space + '(', fragment, ')' ];
+            return [ 'for' + space + '(' + space, fragment, space + ')' ];
         },
 
         SpreadElement: function (expr, precedence, flags) {
