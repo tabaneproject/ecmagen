@@ -1,74 +1,58 @@
-## Escodegen
-[![npm version](https://badge.fury.io/js/escodegen.svg)](http://badge.fury.io/js/escodegen)
-[![Build Status](https://secure.travis-ci.org/estools/escodegen.svg)](http://travis-ci.org/estools/escodegen)
-[![Dependency Status](https://david-dm.org/estools/escodegen.svg)](https://david-dm.org/estools/escodegen)
-[![devDependency Status](https://david-dm.org/estools/escodegen/dev-status.svg)](https://david-dm.org/estools/escodegen#info=devDependencies)
+![image](https://github.com/tabaneproject/ecmagen/assets/157493292/9180a19d-7aa2-4715-9c40-4d73ffc3f8e0)
+ECMAGen is an [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm) (pka. [JavaScript](http://en.wikipedia.org/wiki/JavaScript)) AST Code Transformator/Generator. Mostly supporting [Mozilla's Parser API](https://developer.mozilla.org/en/SpiderMonkey/Parser_API) AST Specification. This project is a reduxed version of the commonly used [escodegen](https://github.com/estools/escodegen) package. Compared to the original package, this package should be used in a [Node.js](https://en.wikipedia.org/wiki/Node.js) platform.
+## How to install
+You can either clone the repos from releases, or you can add this current tree as a submodule for a potentially unstable release. It will soon be available in NPM Registry. To add as a submodule, use:
+```sh
+git submodules add https://github.com/tabaneproject/ecmagen
+```
+## How to use
+```js
+// Import ECMAGen and your favorite
+// Code Parser; and of course the FS.
+import ecmagen from 'ecmagen';
+import acorn from 'acorn';
+import fs from 'node:fs';
 
-Escodegen ([escodegen](http://github.com/estools/escodegen)) is an
-[ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm)
-(also popularly known as [JavaScript](http://en.wikipedia.org/wiki/JavaScript))
-code generator from [Mozilla's Parser API](https://developer.mozilla.org/en/SpiderMonkey/Parser_API)
-AST. See the [online generator](https://estools.github.io/escodegen/demo/index.html)
-for a demo.
+// Use ECMAGen
+let text = fs.readFileSync( __dirname + '/testcode.js', { encoding: 'utf-8' } );
+let ast = acorn.parse( text, { ecmaVersion: 2020 } );
+let output = ecmagen.generate( ast );
 
+// Write Output
+fs.writeFileSync( __dirname + '/testcode.copy.js', output );
+```
+## Hello World Program
+```js
+// Import ECMAGen
+import ecmagen from 'ecmagen';
 
-### Install
+// Use ECMAGen
+let ast = {
+    type: 'BinaryExpression',
+    operator: '-',
+    left: { type: 'Literal', value: 100 },
+    right: { type: 'Literal', value: 60 }
+};
+let output = ecmagen.generate( ast );
+console.log( output ); // 100 - 60
+```
+# License
+Copyright (C) 2012 [Yusuke Suzuki](https://github.com/Constellation) for the original project [escodegen](https://github.com/estools/escodegen) 
+Copyright (C) 2024 [TabaneProject](https://github.com/tabaneproject) for the reduxed version, [ECMAGen](https://github.com/tabaneproject/ecmagen) 
 
-Escodegen can be used in a web browser:
+Copyright (C) 2024 [Botaro Shinomiya](https://github.com/citrizon), for [TabaneProject](https://github.com/tabaneproject)
+Copyright (C) 2024 [OSCILLIX](https://github.com/Oscillix), for [TabaneProject](https://github.com/tabaneproject)
+Copyright (C) 2024 [Bluskript](https://github.com/Bluskript), for [TabaneProject](https://github.com/tabaneproject)
 
-    <script src="escodegen.browser.js"></script>
+And the copyright of the other contributors.
 
-escodegen.browser.js can be found in tagged revisions on GitHub.
-
-Or in a Node.js application via npm:
-
-    npm install escodegen
-
-### Usage
-
-A simple example: the program
-
-    escodegen.generate({
-        type: 'BinaryExpression',
-        operator: '+',
-        left: { type: 'Literal', value: 40 },
-        right: { type: 'Literal', value: 2 }
-    });
-
-produces the string `'40 + 2'`.
-
-See the [API page](https://github.com/estools/escodegen/wiki/API) for
-options. To run the tests, execute `npm test` in the root directory.
-
-### Building browser bundle / minified browser bundle
-
-At first, execute `npm install` to install the all dev dependencies.
-After that,
-
-    npm run-script build
-
-will generate `escodegen.browser.js`, which can be used in browser environments.
-
-And,
-
-    npm run-script build-min
-
-will generate the minified file `escodegen.browser.min.js`.
-
-### License
-
-#### Escodegen
-
-Copyright (C) 2012 [Yusuke Suzuki](http://github.com/Constellation)
- (twitter: [@Constellation](http://twitter.com/Constellation)) and other contributors.
-
+```
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
 
-  * Redistributions of source code must retain the above copyright
+*   Redistributions of source code must retain the above copyright
     notice, this list of conditions and the following disclaimer.
-
-  * Redistributions in binary form must reproduce the above copyright
+*   Redistributions in binary form must reproduce the above copyright
     notice, this list of conditions and the following disclaimer in the
     documentation and/or other materials provided with the distribution.
 
@@ -81,4 +65,5 @@ DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
 LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
 ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE. 
+```
