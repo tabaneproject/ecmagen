@@ -165,7 +165,8 @@
         F_FUNC_BODY = 1 << 3,
         F_DIRECTIVE_CTX = 1 << 4,
         F_SEMICOLON_OPT = 1 << 5,
-        F_FOUND_COALESCE = 1 << 6;
+        F_FOUND_COALESCE = 1 << 6,
+        F_ALLOW_NOWRAP = 1 << 7;
 
     //Expression flag sets
     //NOTE: Flag order:
@@ -1058,8 +1059,10 @@
     CodeGenerator.Statement = {
 
         BlockStatement: function (stmt, flags) {
-            var range, content, result = ['{', newline], that = this;
-
+            var range, content, result, that = this;
+            if ( flags & F_ALLOW_NOWRAP ) {
+                result = [newline];
+            } else { result = ['{', newline] }
             withIndent(function () {
                 // handle functions without any code
                 if (stmt.body.length === 0 && preserveBlankLines) {
@@ -1137,7 +1140,7 @@
                 }
             });
 
-            result.push(addIndent('}'));
+            result.push(addIndent(flags & F_ALLOW_NOWRAP ? '}' : ''));
             return result;
         },
 
@@ -1720,7 +1723,7 @@
                 }
             });
 
-            result.push(this.maybeBlock(stmt.body, flags & F_SEMICOLON_OPT ? S_TFFT : S_TFFF));
+            result.push(this.maybeBlock(stmt.body, (flags & F_SEMICOLON_OPT ? S_TFFT : S_TFFF)) | F_ALLOW_NOWRAP);
             return result;
         },
 
