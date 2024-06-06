@@ -1677,7 +1677,7 @@
                 bodyFlags |= F_SEMICOLON_OPT;
             }
             if (stmt.alternate) {
-                result.push(this.maybeBlock(stmt.consequent, S_TFFF));
+                result.push(this.maybeBlock(stmt.consequent, S_TFFF | F_ALLOW_NOWRAP));
                 result = this.maybeBlockSuffix(stmt.consequent, result);
                 if (stmt.alternate.type === Syntax.IfStatement) {
                     result = join(result, ['else ', this.generateStatement(stmt.alternate, bodyFlags)]);
@@ -1989,8 +1989,9 @@
                 'new',
                 this.generateExpression(expr.callee, Precedence.New, itemFlags)
             );
-
-            if (!(flags & F_ALLOW_UNPARATH_NEW) || parentheses || length > 0) {
+            if ( length === 0 ) {
+                result.push('()');
+            } else if (!(flags & F_ALLOW_UNPARATH_NEW) || parentheses || length > 0) {
                 result.push('(' + space);
                 for (i = 0, iz = length; i < iz; ++i) {
                     result.push(this.generateExpression(expr['arguments'][i], Precedence.Assignment, E_TTT));
