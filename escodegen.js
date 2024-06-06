@@ -1740,7 +1740,7 @@
         },
 
         Program: function (stmt, flags) {
-            var result, fragment, i, iz, bodyFlags;
+            var result, fragment, i, iz, ir = false, bodyFlags;
             iz = stmt.body.length;
             result = [safeConcatenation && iz > 0 ? '\n' : ''];
             bodyFlags = S_TFTF;
@@ -1766,6 +1766,13 @@
                 }
 
                 fragment = addIndent(this.generateStatement(stmt.body[i], bodyFlags));
+                if ( ir === true && ( !stmt.body[i].type.startsWith('Import') || !stmt.body[i].type.startsWith('VariableDeclarat') ) ) {
+                    ir = null;
+                    result.push(newline);
+                }
+                if ( ir === false && (stmt.body[i].type.startsWith('Import') || stmt.body[i].type.startsWith('VariableDeclarat')) ) {
+                    ir = true
+                }
                 result.push(fragment);
                 if (i + 1 < iz && !endsWithLineTerminator(toSourceNodeWhenNeeded(fragment).toString())) {
                     if (preserveBlankLines) {
