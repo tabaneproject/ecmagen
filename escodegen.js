@@ -1723,7 +1723,7 @@
                 }
             });
 
-            result.push(this.maybeBlock(stmt.body, (flags & F_SEMICOLON_OPT ? S_TFFT : S_TFFF)) | F_ALLOW_NOWRAP);
+            result.push(this.maybeBlock(stmt.body, (flags & F_SEMICOLON_OPT ? S_TFFT | F_ALLOW_NOWRAP : S_TFFF)));
             return result;
         },
 
