@@ -15,7 +15,7 @@
     Copyright (C) 2024 OSCILLIX <oscillixonline@gmail.com>
     Copyright (C) 2024 Bluskript <bluskript@gmail.com>
     
-    This section of the code is a rewritten version
+    This section of the code is a reduxed version
     of "escodegen" package: https://github.com/estools/escodegen
     
     Copyright (C) 2012-2014 Yusuke Suzuki <utatane.tea@gmail.com>
