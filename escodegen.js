@@ -871,9 +871,13 @@
     };
 
     CodeGenerator.prototype.maybeBlockSuffix = function (stmt, result) {
-        var ends = endsWithLineTerminator(toSourceNodeWhenNeeded(result).toString());
+        var fragment = toSourceNodeWhenNeeded(result).toString();
+        var ends = endsWithLineTerminator(fragment), alreadyGotSpace = esutils.code.isWhiteSpace(fragment.charCodeAt(fragment.length - 1));
         if (stmt.type === Syntax.BlockStatement && (!extra.comment || !stmt.leadingComments) && !ends) {
-            return [result, space];
+            let res = [];
+            res.push( result );
+            if ( !alreadyGotSpace ) res.push( space );
+            return res;
         }
         if (ends) {
             return [result, base];
