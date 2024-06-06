@@ -1939,14 +1939,16 @@
                 result.push('?.');
             }
 
-            result.push('(' + space);
-            for (i = 0, iz = expr['arguments'].length; i < iz; ++i) {
-                result.push(this.generateExpression(expr['arguments'][i], Precedence.Assignment, E_TTT));
-                if (i + 1 < iz) {
-                    result.push(',' + space);
+            if (expr['arguments'].length !== 0) {
+                result.push('(' + space);
+                for (i = 0, iz = expr['arguments'].length; i < iz; ++i) {
+                    result.push(this.generateExpression(expr['arguments'][i], Precedence.Assignment, E_TTT));
+                    if (i + 1 < iz) {
+                        result.push(',' + space);
+                    }
                 }
-            }
-            result.push(space + ')');
+                result.push(space + ')');
+            } else { result.push('()') }
 
             if (!(flags & F_ALLOW_CALL)) {
                 return ['(' + space, result, space + ')'];
