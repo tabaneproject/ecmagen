@@ -1790,9 +1790,10 @@
             return [
                 this.generateDecorators(stmt),
                 generateAsyncPrefix(stmt, true),
-                'function', space,
+                'function',
                 generateStarSuffix(stmt), noEmptySpace(),
                 stmt.id ? generateIdentifier(stmt.id) : '',
+                space,
                 this.generateFunctionBody(stmt)
             ];
         },
