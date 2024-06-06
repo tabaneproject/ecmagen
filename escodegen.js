@@ -1672,7 +1672,7 @@
                 ];
             });
             semicolonOptional = flags & F_SEMICOLON_OPT;
-            bodyFlags = S_TFFF;
+            bodyFlags = S_TFFF | F_ALLOW_NOWRAP;
             if (semicolonOptional) {
                 bodyFlags |= F_SEMICOLON_OPT;
             }
