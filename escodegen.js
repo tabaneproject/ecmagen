@@ -1060,7 +1060,7 @@
 
         BlockStatement: function (stmt, flags) {
             var range, content, result, that = this;
-            if ( flags & F_ALLOW_NOWRAP ) {
+            if ( flags & F_ALLOW_NOWRAP && stmt.body.length === 1 ) {
                 result = [newline];
             } else { result = ['{', newline] }
             withIndent(function () {
@@ -1140,7 +1140,7 @@
                 }
             });
 
-            result.push(addIndent(flags & F_ALLOW_NOWRAP ? '}' : ''));
+            result.push(addIndent(flags & F_ALLOW_NOWRAP && stmt.body.length === 1 ? '}' : ''));
             return result;
         },
 
