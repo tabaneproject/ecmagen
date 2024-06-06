@@ -37,13 +37,13 @@ let output = ecmagen.generate( ast );
 console.log( output ); // 100 - 60
 ```
 # License
-Copyright (C) 2012 [Yusuke Suzuki](https://github.com/Constellation) for the original project [escodegen](https://github.com/estools/escodegen) 
-Copyright (C) 2024 [TabaneProject](https://github.com/tabaneproject) for the reduxed version, [ECMAGen](https://github.com/tabaneproject/ecmagen) 
-
-Copyright (C) 2024 [Botaro Shinomiya](https://github.com/citrizon), for [TabaneProject](https://github.com/tabaneproject)
-Copyright (C) 2024 [OSCILLIX](https://github.com/Oscillix), for [TabaneProject](https://github.com/tabaneproject)
-Copyright (C) 2024 [Bluskript](https://github.com/Bluskript), for [TabaneProject](https://github.com/tabaneproject)
-
+Copyright (C) 2012 [Yusuke Suzuki](https://github.com/Constellation) for the original project [escodegen](https://github.com/estools/escodegen) <br>
+Copyright (C) 2024 [TabaneProject](https://github.com/tabaneproject) for the reduxed version, [ECMAGen](https://github.com/tabaneproject/ecmagen) <br>
+<br>
+Copyright (C) 2024 [Botaro Shinomiya](https://github.com/citrizon), for [TabaneProject](https://github.com/tabaneproject) <br>
+Copyright (C) 2024 [OSCILLIX](https://github.com/Oscillix), for [TabaneProject](https://github.com/tabaneproject) <br>
+Copyright (C) 2024 [Bluskript](https://github.com/Bluskript), for [TabaneProject](https://github.com/tabaneproject) <br>
+<br>
 And the copyright of the other contributors.
 
 ```
