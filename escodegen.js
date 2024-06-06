@@ -1140,7 +1140,7 @@
                 }
             });
 
-            result.push(addIndent((flags & F_ALLOW_NOWRAP) && stmt.body.length === 1 ? '}' : ''));
+            result.push(addIndent((flags & F_ALLOW_NOWRAP) && stmt.body.length === 1 ? '' : '}'));
             return result;
         },
 
