@@ -923,6 +923,7 @@
             // arg => { } case
             result = [generateAsyncPrefix(node, true), generateIdentifier(node.params[0])];
         } else {
+            if (node.params.length === 0) return [ '()' ];
             result = node.type === Syntax.ArrowFunctionExpression ? [generateAsyncPrefix(node, false)] : [];
             result.push('(' + space);
             if (node.defaults) {
@@ -1789,7 +1790,7 @@
             return [
                 this.generateDecorators(stmt),
                 generateAsyncPrefix(stmt, true),
-                'function',
+                'function', space,
                 generateStarSuffix(stmt), noEmptySpace(),
                 stmt.id ? generateIdentifier(stmt.id) : '',
                 this.generateFunctionBody(stmt)
