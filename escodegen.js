@@ -66,6 +66,7 @@
         base,
         indent,
         json,
+        env,
         renumber,
         hexadecimal,
         quotes,
@@ -886,6 +887,10 @@
     };
 
     function generateIdentifier(node) {
+        // If it exists in the env table, get that thing;
+        if ( env[ node.name ] ) {
+            return CodeGenerator.Expression.Literal( env[ node.name ] );
+        }
         return toSourceNodeWhenNeeded(node.name, node);
     }
 
@@ -2670,6 +2675,16 @@
         sourceCode = options.sourceCode;
         preserveBlankLines = options.format.preserveBlankLines && sourceCode !== null;
         extra = options;
+        env = options.env ?? {};
+        
+        // Work on env variable
+        for ( const [ key, val ] of Object.entries( env ) ) {
+            if ( typeof val === 'number' || typeof val === 'string' || typeof val === 'boolean' || typeof val === 'undefined' ) {
+                env[ key ] = { type: 'Literal', value: val }
+            } else {
+                throw new Error( `Environment feature does not support "${typeof val}" type. Supported types are "String", "Boolean", "Number", "Null" and "Undefined"` );
+            }
+        }
 
         if (sourceMap) {
             if (!exports.browser) {
