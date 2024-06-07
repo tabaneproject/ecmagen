@@ -9,7 +9,7 @@ git submodules add https://github.com/tabaneproject/ecmagen
 ```js
 // Import ECMAGen and your favorite
 // Code Parser; and of course the FS.
-import ecmagen from 'ecmagen';
+import ecmagen from '@tabaneproject/ecmagen';
 import acorn from 'acorn';
 import fs from 'node:fs';
 
@@ -24,7 +24,7 @@ fs.writeFileSync( __dirname + '/testcode.copy.js', output );
 ## Hello World Program
 ```js
 // Import ECMAGen
-import ecmagen from 'ecmagen';
+import ecmagen from '@tabaneproject/ecmagen';
 
 // Use ECMAGen
 let ast = {
