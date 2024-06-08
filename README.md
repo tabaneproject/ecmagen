@@ -1,9 +1,13 @@
 ![image](https://github.com/tabaneproject/ecmagen/assets/157493292/9180a19d-7aa2-4715-9c40-4d73ffc3f8e0)
 ECMAGen is an [ECMAScript](http://www.ecma-international.org/publications/standards/Ecma-262.htm) (pka. [JavaScript](http://en.wikipedia.org/wiki/JavaScript)) AST Code Transformator/Generator. Mostly supporting [Mozilla's Parser API](https://developer.mozilla.org/en/SpiderMonkey/Parser_API) AST Specification. This project is a reduxed version of the commonly used [escodegen](https://github.com/estools/escodegen) package. Compared to the original package, this package should be used in a [Node.js](https://en.wikipedia.org/wiki/Node.js) platform.
 ## How to install
-You can either clone the repos from releases, or you can add this current tree as a submodule for a potentially unstable release. It will soon be available in NPM Registry. To add as a submodule, use:
+You can either clone the repos from releases, or you can add this current tree as a submodule for a potentially unstable release. To add as a submodule, use:
 ```sh
 git submodules add https://github.com/tabaneproject/ecmagen
+```
+To get the latest release from the NPM registry, use:
+```sh
+npm install @tabaneproject/ecmagen
 ```
 ## How to use
 ```js
