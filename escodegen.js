@@ -2384,6 +2384,10 @@
             return generateIdentifier(expr);
         },
 
+        PrivateIdentifier: function (expr, precedence, flags) {
+            return ['#', generateIdentifier(expr)];
+        },
+
         ImportDefaultSpecifier: function (expr, precedence, flags) {
             return generateIdentifier(expr.id || expr.local);
         },
