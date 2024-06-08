@@ -254,6 +254,11 @@
         return len && esutils.code.isLineTerminator(str.charCodeAt(len - 1));
     }
 
+    function NoImplementation (node) {
+        let objectOutput = '{\n' + Object.entries( node ).map( ( [ k, v ] ) => `    ${k}: \t ${( v?.type ? v.type : v )}` ).join( '\n' ) + '\n}';
+        throw new Error( `Type '${node.type}' is not implemented. If it is an ECMAScript feature, please file a report to the GitHub Repo @ https://github.com/tabaneproject/ecmagen/issues\n\n--------- INCLUDE THIS IN ISSUE ---------\n\n${objectOutput}\n\n-----------------------------------------\n\n` );
+    }
+
     function merge(target, override) {
         var key;
         for (key in override) {
@@ -2586,6 +2591,7 @@
             return generateVerbatim(expr, precedence);
         }
 
+        if ( !this[type] ) NoImplementation( expr );
         result = this[type](expr, precedence, flags);
 
 
@@ -2599,6 +2605,7 @@
         var result,
             fragment;
 
+        if ( !this[stmt.type] ) NoImplementation( stmt );
         result = this[stmt.type](stmt, flags);
 
         // Attach comments
