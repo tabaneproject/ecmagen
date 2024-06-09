@@ -982,7 +982,7 @@
             result.push('=>');
         }
 
-        if (node.expression) {
+        if (node.expression || isExpression(node.body)) {
             result.push(space);
             expr = this.generateExpression(node.body, Precedence.Assignment, E_TTT);
             if (expr.toString().charAt(0) === '{') {
