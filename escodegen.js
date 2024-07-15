@@ -895,10 +895,11 @@
         // If it exists in the env table, get that thing
         // Prefixing it with underscore to prevent gathering
         // stuff like "constructor" from the object :sob:
+        let computedName = node.type === 'PrivateIdentifier' ? '#' + node.name : node.name; 
         if ( env[ '_' + node.name ] ) {
             return CodeGenerator.Expression.Literal( env[ '_' + node.name ] );
         }
-        return toSourceNodeWhenNeeded(node.name, node);
+        return toSourceNodeWhenNeeded(computedName, node);
     }
 
     function generateAsyncPrefix(node, spaceRequired) {
@@ -2385,7 +2386,7 @@
         },
 
         PrivateIdentifier: function (expr, precedence, flags) {
-            return ['#', generateIdentifier(expr)];
+            return generateIdentifier(expr);
         },
 
         ImportDefaultSpecifier: function (expr, precedence, flags) {
