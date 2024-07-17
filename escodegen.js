@@ -1177,7 +1177,7 @@
         PropertyDefinition: function (expr, precedence, flags) {
             var result;
             if (expr['static']) {
-                result = ['static' + space];
+                result = ['static '];
             } else {
                 result = [];
             }
