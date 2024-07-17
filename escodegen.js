@@ -1181,7 +1181,10 @@
             } else {
                 result = [];
             }
-            result.push(this.generateAssignment(expr.key, expr.value, '=', Precedence.Assignment, E_TTF));
+            if ( expr.value )
+                result.push(this.generateAssignment(expr.key, expr.value, '=', Precedence.Assignment, E_TTF));
+            else
+                result.push(this.generateExpression(expr.key, Precedence.Call, flags));
             result.push(this.semicolon(flags));
             return result;
         },
