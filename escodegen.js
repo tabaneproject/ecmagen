@@ -897,7 +897,7 @@
         // stuff like "constructor" from the object :sob:
         let computedName = node.type === 'PrivateIdentifier' ? '#' + node.name : node.name; 
         if ( env[ '_' + node.name ] ) {
-            return CodeGenerator.Expression.Literal( env[ '_' + node.name ] );
+            return CodeGenerator.Expression.Literal( env[ '_' + node.name ], Precedence.Assignment, E_TFF );
         }
         return toSourceNodeWhenNeeded(computedName, node);
     }
